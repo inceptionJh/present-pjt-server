@@ -1,13 +1,35 @@
-# IM09 2-week project : Present Server repository
+# IM09 2-week project : Present
 
-Coming soon...
-(added in dev)
+## What is it ?
 
-## Architecture
+- Chrome app : starter page like [momentum](https://momentumdash.com/)
+
+- Daily briefing with many widgets
+  - Photo from [Unsplash](https://unsplash.com/developers)
+  - Hello : User name
+  - Quote (maxim)
+  - D-Day
+  - To-do
+  - Bookmark (Optional)
+  - Crawling : Fortune (오늘의 운세), Packt daily free book, Ikea daily 반값 deal, ...
+
+## System Architecture
+
+![System Architecutre](./doc/fig/architecture.png)
 
 - Backend/Frontend configuartion
 - How to interact
 - ...
+
+## Technical Stack
+
+- Front-end
+  - React (w/ react-redux), Browser localStorage
+  - Chrome App packaging
+- Back-end
+  - OAuth (Social login), REST API, Open API usage (Unsplash, Quote, ...), Web Crawling (crawler, puppet)
+  - Database : RDB (MySQL), NoSQL (MongoDB : Optional)
+  - Deploy : Amazon AWS EC2/S3, Heroku
 
 ## Features
 
