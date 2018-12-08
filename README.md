@@ -17,9 +17,15 @@
 
 ![System Architecutre](./doc/fig/architecture.png)
 
-- Backend/Frontend configuartion
-- How to interact
-- ...
+### Server Architecture
+
+![server architecture](./doc/fig/server-architecture.png)
+
+### Client Architecture
+
+Storages which each widget utilizes.
+
+![client architecture](./doc/fig/client-storage.png)
 
 ## Technical Stack
 
