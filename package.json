@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "heroku-prebuild": "git submodule init && git submodule",
-    "heroku-postbuild": "cd client && git checkout develop && update && npm install && npm run build"
+    "heroku-prebuild": "git submodule init && git submodule update",
+    "heroku-postbuild": "cd client && git checkout develop && npm install && npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
