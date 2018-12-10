@@ -12,6 +12,7 @@
   - To-do
   - Bookmark (Optional)
   - Crawling : Fortune (오늘의 운세), Packt daily free book, Ikea daily 반값 deal, ...
+  - Habit tracker like github graph.
 
 ## System Architecture
 
