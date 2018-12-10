@@ -9,3 +9,13 @@
   - Architecture(Server)
   - Client Server connection test
   - Team meeting(evening) //
+
+## 2018.12.10
+
+  - Team meeting(morning)
+  - server init merge
+  - client init merge
+  - Web storage study
+  - git submodule study
+  - heroku deploy
+  - Team meeting(evening) //
