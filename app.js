@@ -5,17 +5,21 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-
+var presentRouter = require("./routes/present");
 var app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "./build")));
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.use("/", indexRouter);
+app.use("/present", presentRouter);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
