@@ -1,13 +1,11 @@
-## 2018.12.07
-
-  - git workflow
-
-## 2018.12.08
+## 2018.12.11
 
   - Team meeting(morning)
-  - Trello 정리 (Reference, Sprint, Project backlog)
-  - Architecture(Component)
-  - Client Server connection test
+  - AWS Deploy (submodule)
+  - Clock(wiget) 
+  - Local photo(wiget) 
+  - DB 구조 회의의
+  - Engineer check in
   - Team meeting(evening) //
 
 ## 2018.12.10
@@ -18,3 +16,20 @@
   - Git Submodule 
   - Heroku deploy
   - Team meeting(evening) //
+
+## 2018.12.08
+
+  - Team meeting(morning)
+  - Trello 정리 (Reference, Sprint, Project backlog)
+  - Architecture(Component)
+  - Client Server connection test
+  - Team meeting(evening) //
+
+## 2018.12.07
+
+  - git workflow
+
+
+
+
+
