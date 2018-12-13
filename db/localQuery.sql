@@ -1,0 +1,15 @@
+USE present;
+-- CREATE TABLE users (
+-- 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+-- 	email VARCHAR(50),
+-- 	password VARCHAR(50),
+-- 	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+-- 	dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+-- );
+
+-- INSERT INTO users(email, password)
+-- VALUES("a@b.com", "funcking77")
+
+-- DELETE FROM users;
+
+SELECT * from users
