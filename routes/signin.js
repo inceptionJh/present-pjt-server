@@ -11,8 +11,7 @@ router.post('/', async function(req, res, next) {
   if (data.length !== 0) {
     const [{ password }] = data;
     if (password === req.body.password) {
-      // res.send('[+] /signin OK.');
-      res.redirect('/auth/signin');
+      res.send('[+] /signin OK.');
     }
   } else {
     res.send('[-] /signin redirect to /signup.');

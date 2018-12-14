@@ -22,12 +22,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/client/build')));
-app.use('/', indexRouter);
-app.use('/present', presentRouter);
-app.use('/signup', signupRouter);
-app.use('/signin', signinRouter);
-app.use('/signout', signoutRouter);
-app.use('/users', usersRouter);
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 app.use(
   session({
     secret: 'codestates present',
@@ -36,6 +39,12 @@ app.use(
     cookie: { maxAge: 60000 }
   })
 );
+app.use('/', indexRouter);
+app.use('/present', presentRouter);
+app.use('/signup', signupRouter);
+app.use('/signin', signinRouter);
+app.use('/signout', signoutRouter);
+app.use('/users', usersRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
