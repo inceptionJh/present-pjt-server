@@ -10,11 +10,21 @@ router.post('/', async function(req, res, next) {
 
   if (data.length !== 0) {
     const [{ password }] = data;
+    // Normal user
     if (password === req.body.password) {
-      res.send('[+] /signin OK.');
+      // res.send('[+] /signin OK.');
+      res.send(
+        JSON.stringify({
+          name: req.body.email
+        })
+      );
+      // Not matched : failed.
+    } else {
+      res.send(401, 'wrong credential');
     }
   } else {
-    res.send('[-] /signin redirect to /signup.');
+    // res.send('[-] /signin redirect to /signup.');
+    res.redirect('/signup');
   }
 });
 
