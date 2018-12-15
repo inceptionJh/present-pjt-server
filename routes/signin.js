@@ -24,6 +24,7 @@ router.post('/', async function(req, res, next) {
     }
   } else {
     // res.send('[-] /signin redirect to /signup.');
+    res.send(401, 'need to signup');
     res.redirect('/signup');
   }
 });
