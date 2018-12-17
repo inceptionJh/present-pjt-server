@@ -30,7 +30,6 @@ class Todos {
 
   patchTodo({ id, state, text }) {
     const query = updateTodo({ id, state, text });
-    console.log(`\n\n${query}\n\n`);
     return Todos.dbQuery(query);
   }
 
