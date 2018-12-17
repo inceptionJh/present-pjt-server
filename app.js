@@ -15,6 +15,8 @@ var todosRouter = require('./routes/todos');
 
 var app = express();
 
+var NODE_ENV = require('./config')();
+
 // DB initialization.
 require('./db');
 
@@ -50,7 +52,7 @@ app.use('/users', usersRouter);
 app.use('/todo', todosRouter);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, NODE_ENV.STATIC_PATH));
 });
 app.use(function(req, res, next) {
   next(createError(404));
