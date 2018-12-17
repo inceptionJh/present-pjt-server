@@ -12,5 +12,7 @@ module.exports = function() {
       return {
         STATIC_PATH: '/client/build'
       };
+    default:
+      return {};
   }
 };
