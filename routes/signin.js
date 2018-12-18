@@ -1,44 +1,32 @@
 var express = require('express');
-var router = express.Router();
 var users = require('../models/users/users');
 
-router.post('/', async function(req, res, next) {
-  const data = await users
-    .queryUser(req.body.email)
-    .then(data => data)
-    .catch(err => console.error(err.message));
+var router = express.Router();
 
-  if (data.length !== 0) {
-    const [{ password }] = data;
-    // Normal user
-    if (password === req.body.password) {
-      // res.send('[+] /signin OK.');
-      res.send(
-        JSON.stringify({
-          name: req.body.email
-        })
-      );
-      // Not matched : failed.
+router.post('/', async function(req, res) {
+  const { email = '', password = '' } = req.body;
+
+  const data = await users.getUser({ email });
+  const hasUser = !!data.length;
+
+  if (hasUser) {
+    const passwordFromDB = data[0].password;
+    const isSamePassword = password === passwordFromDB;
+
+    if (isSamePassword) {
+      res.json({ signInOk: true });
     } else {
-      res.status(401).send(
-        JSON.stringify({
-          error: 'NOT-MATCHED'
-        })
-      );
+      res.json({
+        signInOk: false,
+        message: 'password가 틀렸습니다.'
+      });
     }
   } else {
-    // res.send('[-] /signin redirect to /signup.');
-    res.status(401).send(
-      JSON.stringify({
-        error: 'NEED-TO-SIGNUP'
-      })
-    );
-    // res.redirect('/signup');
+    res.json({
+      signInOk: false,
+      message: '해당 email이 존재하지 않습니다.'
+    });
   }
-});
-
-router.options('/', async function(req, res) {
-  res.status(200).send('OK');
 });
 
 module.exports = router;

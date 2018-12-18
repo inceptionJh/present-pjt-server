@@ -7,15 +7,14 @@ router.post('/', async function(req, res) {
   const { email, password } = req.body;
 
   const data = await users.getUser({ email });
+  const hasUser = !!data.length;
 
-  if (data.length) {
+  if (!hasUser) {
     users.postUser({ email, password });
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ signOk: true }));
+    res.json({ signUpOk: true });
   } else {
-    res.setHeader('Content-Type', 'application/json');
-    res.end({ message: '[-] NOK : Already registered.' });
+    res.json({ signUpOk: false, message: '[-] NOK : Already registered.' });
   }
 });
 
