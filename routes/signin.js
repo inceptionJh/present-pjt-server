@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var users = require('../models/users');
+var users = require('../models/users/users');
 
 router.post('/', async function(req, res, next) {
   const data = await users
@@ -20,13 +20,25 @@ router.post('/', async function(req, res, next) {
       );
       // Not matched : failed.
     } else {
-      res.send(401, 'wrong credential');
+      res.status(401).send(
+        JSON.stringify({
+          error: 'NOT-MATCHED'
+        })
+      );
     }
   } else {
     // res.send('[-] /signin redirect to /signup.');
-    res.send(401, 'need to signup');
-    res.redirect('/signup');
+    res.status(401).send(
+      JSON.stringify({
+        error: 'NEED-TO-SIGNUP'
+      })
+    );
+    // res.redirect('/signup');
   }
+});
+
+router.options('/', async function(req, res) {
+  res.status(200).send('OK');
 });
 
 module.exports = router;
