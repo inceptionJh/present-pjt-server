@@ -1,29 +1,22 @@
 var express = require('express');
-var router = express.Router();
 var users = require('../models/users/users');
 
-router.post('/', function(req, res, next) {
-  users
-    .queryUser(req.body.email)
-    .then(data => {
-      if (data.length === 0) {
-        users.createUser(req.body.email, req.body.password).then(rows => {
-          console.log(rows);
-        });
-        res.send(
-          JSON.stringify({
-            email: req.body.email
-          })
-        );
-        // res.redirect('/signin');
-      } else {
-        console.warn('[-] Already registered.');
-        // TODO: redirect
-        // res.redirect('/login');
-        res.end('[-] NOK : Already registered.');
-      }
-    })
-    .catch(err => console.error(err.message));
+var router = express.Router();
+
+router.post('/', async function(req, res) {
+  const { email, password } = req.body;
+
+  const data = await users.getUser({ email });
+
+  if (data.length) {
+    users.postUser({ email, password });
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ signOk: true }));
+  } else {
+    res.setHeader('Content-Type', 'application/json');
+    res.end({ message: '[-] NOK : Already registered.' });
+  }
 });
 
 module.exports = router;

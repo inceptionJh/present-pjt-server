@@ -1,24 +1,35 @@
 const connection = require('../../db');
+const {
+  updateUserPassword,
+  createUser,
+  deleteUser,
+  readUser,
+  readUsers
+} = require('./query');
 
 class Users {
-  queryUsers() {
-    const query = `SELECT * from users`;
-
+  getUser({ email }) {
+    const query = readUser({ email });
     return this.dbQuery(query);
   }
 
-  queryUser(email) {
-    const query = `SELECT * from users where email="${email}"`;
-
+  getUsers() {
+    const query = readUsers();
     return this.dbQuery(query);
   }
 
-  createUser(email, password) {
-    const query = `
-    INSERT INTO users(email, password)
-    VALUES("${email}", "${password}")
-    `;
+  postUser({ email, password }) {
+    const query = createUser({ email, password });
+    return this.dbQuery(query);
+  }
 
+  deleteUser({ email }) {
+    const query = deleteUser({ email });
+    return this.dbQuery(query);
+  }
+
+  patchUser({ email, password }) {
+    const query = updateUserPassword({ email, password });
     return this.dbQuery(query);
   }
 
@@ -33,7 +44,5 @@ class Users {
 }
 
 const users = new Users();
-// m = users.queryUsers();
-// console.log(m);
 
 module.exports = users; // new Users();
