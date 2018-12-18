@@ -9,7 +9,7 @@ module.exports = {
   },
 
   readUser: function({ email }) {
-    return `SELECT * FROM ${TABLE_NAME} WHERE id=${id}`;
+    return `SELECT * FROM ${TABLE_NAME} WHERE email="${email}"`;
   },
 
   readUsers: function() {
