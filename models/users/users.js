@@ -10,30 +10,30 @@ const {
 class Users {
   getUser({ email }) {
     const query = readUser({ email });
-    return this.dbQuery(query);
+    return Users.dbQuery(query);
   }
 
   getUsers() {
     const query = readUsers();
-    return this.dbQuery(query);
+    return Users.dbQuery(query);
   }
 
   postUser({ email, password }) {
     const query = createUser({ email, password });
-    return this.dbQuery(query);
+    return Users.dbQuery(query);
   }
 
   deleteUser({ email }) {
     const query = deleteUser({ email });
-    return this.dbQuery(query);
+    return Users.dbQuery(query);
   }
 
   patchUser({ email, password }) {
     const query = updateUserPassword({ email, password });
-    return this.dbQuery(query);
+    return Users.dbQuery(query);
   }
 
-  dbQuery(query) {
+  static dbQuery(query) {
     return new Promise((resolve, reject) => {
       connection.query(query, function(err, rows, fields) {
         if (err) reject(new Error(err));
