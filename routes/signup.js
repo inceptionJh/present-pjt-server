@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var users = require('../models/users');
+var users = require('../models/users/users');
 
 router.post('/', function(req, res, next) {
   users
@@ -10,8 +10,12 @@ router.post('/', function(req, res, next) {
         users.createUser(req.body.email, req.body.password).then(rows => {
           console.log(rows);
         });
-        // res.end('[+] Signup OK');
-        res.redirect('/signin');
+        res.send(
+          JSON.stringify({
+            email: req.body.email
+          })
+        );
+        // res.redirect('/signin');
       } else {
         console.warn('[-] Already registered.');
         // TODO: redirect
