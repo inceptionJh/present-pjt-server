@@ -41,6 +41,11 @@ app.use(
   })
 );
 
+app.use(function(req, res, next) {
+  console.log(req.session.token);
+  next();
+});
+
 app.use('/', indexRouter);
 
 app.use('/signup', signupRouter);

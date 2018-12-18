@@ -7,24 +7,26 @@ router.post('/', async function(req, res) {
   const { email = '', password = '' } = req.body;
 
   const data = await users.getUser({ email });
-  const hasUser = !!data.length;
+  const hasEmail = !!data.length;
 
-  if (hasUser) {
+  if (hasEmail) {
     const passwordFromDB = data[0].password;
     const isSamePassword = password === passwordFromDB;
 
     if (isSamePassword) {
+      req.session.token = email;
+
       res.json({ signInOk: true });
     } else {
       res.json({
         signInOk: false,
-        message: 'password가 틀렸습니다.'
+        message: 'WRONG_PASSWORD'
       });
     }
   } else {
     res.json({
       signInOk: false,
-      message: '해당 email이 존재하지 않습니다.'
+      message: 'NEED_TO_SIGNUP'
     });
   }
 });
