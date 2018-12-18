@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
+var { handleCors } = require('./middleware/cors');
+var { handleAuth } = require('./middleware/auth');
+
 var indexRouter = require('./routes/index');
-var presentRouter = require('./routes/present');
 var signupRouter = require('./routes/signup');
 var signinRouter = require('./routes/signin');
 var signoutRouter = require('./routes/signout');
@@ -26,35 +28,35 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, NODE_ENV.STATIC_PATH)));
 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, GET, DELETE, OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
+app.use(handleCors);
 
 app.use(
   session({
     secret: 'codestates present',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: {
+      maxAge: 60 * 1000
+    }
   })
 );
+
 app.use('/', indexRouter);
-app.use('/present', presentRouter);
+
 app.use('/signup', signupRouter);
+
 app.use('/signin', signinRouter);
+
 app.use('/signout', signoutRouter);
+
 app.use('/users', usersRouter);
-app.use('/todo', todosRouter);
+
+app.use('/todo', handleAuth, todosRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, NODE_ENV.STATIC_PATH));
 });
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
