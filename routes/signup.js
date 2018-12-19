@@ -3,7 +3,7 @@ var users = require('../models/users/users');
 
 var router = express.Router();
 
-router.post('/', async function(req, res) {
+router.post('/', async function(req, res, next) {
   const { email, password } = req.body;
 
   const data = await users.getUser({ email });
@@ -14,7 +14,14 @@ router.post('/', async function(req, res) {
 
     res.json({ signUpOk: true });
   } else {
-    res.json({ signUpOk: false, message: '[-] NOK : Already registered.' });
+    const err = new Error(
+      JSON.stringify({
+        signInOk: false,
+        message: 'ALREADY_REGISTERED'
+      })
+    );
+    err.status = 403;
+    next(err);
   }
 });
 
