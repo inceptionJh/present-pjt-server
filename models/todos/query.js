@@ -1,4 +1,4 @@
-const TABLE_NAME = "todos";
+const TABLE_NAME = 'todos';
 
 module.exports = {
   createTodo: ({ id, state, text }) => {
@@ -8,7 +8,7 @@ module.exports = {
     `;
   },
 
-  readTodo: id => `SELECT * FROM ${TABLE_NAME} WHERE id=${id}`,
+  readTodo: ({ id }) => `SELECT * FROM ${TABLE_NAME} WHERE id=${id}`,
 
   readTodos: () => `SELECT * FROM ${TABLE_NAME}`,
 
@@ -18,5 +18,5 @@ module.exports = {
     WHERE id=${id};
   `,
 
-  deleteTodo: id => `DELETE FROM ${TABLE_NAME} WHERE id=${id}`
+  deleteTodo: ({ id }) => `DELETE FROM ${TABLE_NAME} WHERE id=${id}`
 };

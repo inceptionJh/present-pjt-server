@@ -1,15 +1,15 @@
-const connection = require("../../db");
+const connection = require('../../db');
 const {
   readTodo,
   readTodos,
   createTodo,
   deleteTodo,
   updateTodo
-} = require("./query");
+} = require('./query');
 
 class Todos {
-  getTodo(id) {
-    const query = readTodo(id);
+  getTodo({ id }) {
+    const query = readTodo({ id });
     return Todos.dbQuery(query);
   }
 
@@ -23,8 +23,8 @@ class Todos {
     return Todos.dbQuery(query);
   }
 
-  deleteTodo(id) {
-    const query = deleteTodo(id);
+  deleteTodo({ id }) {
+    const query = deleteTodo({ id });
     return Todos.dbQuery(query);
   }
 

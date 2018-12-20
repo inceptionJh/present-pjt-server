@@ -51,7 +51,7 @@ app.use('/signout', signoutRouter);
 
 app.use('/users', usersRouter);
 
-app.use('/todo', handleAuth, todosRouter);
+app.use('/todo', todosRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, NODE_ENV.STATIC_PATH));
